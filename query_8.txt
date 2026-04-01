@@ -1,0 +1,4 @@
+/* Escreva uma consulta que retorna o nome dos clientes (customer_name) em que o nome da cidade
+(customer_city) inicia com a letra 'P' ou o nome do cliente contém a letra 'o'. */
+
+π customer_name (σ customer_city like 'P%' or customer_name like '%o%' (customer))

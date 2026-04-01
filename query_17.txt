@@ -1,0 +1,5 @@
+/* Escreva uma consulta que retorna o nome (branch_name) e a cidade (branch_city) das agências que possuem
+empréstimo do cliente cujo nome (customer_name) é 'Smith'. O resultado não deve conter ocorrências
+duplicadas. */
+
+π branch.branch_name, branch.branch_city (σ customer.customer_name = 'Smith' ∧ branch.branch_name = loan.branch_name ∧ loan.loan_number = borrower.loan_number ∧ borrower.customer_name = customer.customer_name (loan ⨯ customer ⨯ branch ⨯ borrower))

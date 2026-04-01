@@ -1,0 +1,3 @@
+/* Escreva uma consulta que retorna o nome das agências (branch_name) que terminam com a letra 'n' e que o nome da cidade (branch_city) contenha a letra 'i'. */
+
+π branch_name (σ branch_name LIKE '%n' ∧ branch_city LIKE '%i%' (branch))

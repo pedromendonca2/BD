@@ -1,0 +1,4 @@
+/* Escreva uma consulta que retorna o nome (branch_name) e a cidade (branch_city) das agências que possuem
+conta do cliente cujo nome (customer_name) é 'Hayes'. O resultado não deve conter ocorrências duplicadas. */
+
+π branch.branch_name, branch.branch_city (σ customer.customer_name = 'Hayes' ∧ account.branch_name = branch.branch_name ∧ account.account_number = depositor.account_number ∧ depositor.customer_name = customer.customer_name (account ⨯ customer ⨯ branch ⨯ depositor))

@@ -1,0 +1,4 @@
+/* Escreva uma consulta que retorna o nome das agências (branch_name) em que o nome da cidade (branch_city)
+contém a letra 'n' ou o nome da agência inicia com a letra 'R'. */
+
+π branch_name (σ branch_city like '%n%' or branch_name like 'R%' (branch))

@@ -1,0 +1,7 @@
+/* Escreva uma consulta que retorne o nome (branch_name) e a cidade (branch_city) das agências que possuem
+simultaneamente conta e empréstimo do cliente cujo nome (customer_name) é 'Hayes'. O resultado não deve
+conter ocorrências duplicadas. */
+
+/* π branch.branch_name, branch.branch_city (σ customer.customer_name = 'Hayes' ∧ branch.branch_name = loan.branch_name ∧ loan.loan_number = borrower.loan_number ∧ borrower.customer_name = customer.customer_name ∧ account.account_number = depositor.account_number ∧ depositor.customer_name = customer.customer_name (account x depositor ⨯ loan ⨯ customer ⨯ branch ⨯ borrower)) */
+
+(π branch_name, branch_city (σ customer_name = 'Hayes' (branch ⨝ account ⨝ depositor ⨝ customer))) ∩ (π branch_name, branch_city (σ customer_name = 'Hayes' (branch ⨝ loan ⨝ borrower ⨝ customer)))
