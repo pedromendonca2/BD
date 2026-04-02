@@ -1,0 +1,9 @@
+/* Escreva uma consulta para obter a(s) nacionalidade(s) (coluna nationality) nas quais não há equipes (tabela
+consturctors), mas que têm pilotos (tabela drivers) que já atingiram pelo menos o terceiro lugar em uma
+corrida (coluna positionOrder da tabela results). O resultado não deve conter ocorrências duplicadas. */
+
+nE = pi nationality (constructors)
+nP = pi nationality (drivers)
+nEP = nE intersect nP
+nEsP = nE - nEP
+pi nationality (nEsP)

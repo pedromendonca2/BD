@@ -5,4 +5,4 @@
     (customer ⨯ account ⨯ depositor)
 ) */
 
-π customer_name, customer_city (customer) ∩ π customer_name, customer_city (σ branch_name = 'Perryridge' (account ⨝ depositor ⨝ customer))
+π customer_name, customer_city (σ branch_name = 'Perryridge' (account ⨝ depositor ⨝ customer))
