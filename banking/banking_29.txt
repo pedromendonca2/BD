@@ -1,0 +1,6 @@
+/* Escreva uma consulta que retorna uma única coluna contendo o número da(s) conta(s) (coluna account_number)
+cujo saldo (coluna balance da tabela account) é o maior dentre todas as contas. */
+
+MaxSaldo = γ max(balance) → m (account)
+
+π account_number (σ balance = m (account ⨯ MaxSaldo))

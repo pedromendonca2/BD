@@ -1,0 +1,12 @@
+/* Escreva uma consulta para obter o(s) nome(s) completo(s) do(s) piloto(s) (colunas forename e surname da tabela
+drivers separadas por um ' ') que não participaram de nenhuma corrida (tabela races).
+Nota: Use a função CONCAT() para unir valores em uma única cadeia de caracteres (string) – valores não textuais são
+convertidos automaticamente para texto. Os argumentos a serem concatenados devem ser separados por vírgulas. No
+RelaX e no PostgreSQL, também é possível usar o operador || entre as strings a serem concatenadas. */
+
+CorridasTotal = pi driverId (drivers) 
+CorridasD = pi driverId (results)
+
+CorridaSD = CorridasTotal - CorridasD
+
+pi CONCAT(forename, ' ', surname) → full_name (drivers ⨝ CorridaSD)

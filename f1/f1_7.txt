@@ -1,0 +1,16 @@
+/* Escreva uma consulta para obter uma relação com quatro colunas: nome da equipe (coluna name da tabela
+constructors), nome completo do piloto (colunas forename e surname da tabela drivers separados por um
+' '), nome do circuito (coluna name da tabela circuits) e ano da corrida (coluna year da tabela races). A
+relação deve conter linhas para cada vez que um piloto da equipe tenha obtido a primeira posição (coluna
+positionOrder da tabela results) em uma corrida no circuito em questão. Devem aparecer somente equipes cuja
+nacionalidade seja francesa (coluna nationality com valor 'French'). Caso uma equipe francesa não tenha
+alcançado nenhuma vez a primeira posição, seu nome deve aparecer seguido de colunas vazias (NULL). As colunas da
+tabela de saída devem ter os nomes Equipe, Piloto, Circuito e Ano, respectivamente, e o resultado não deve
+conter ocorrências duplicadas. */
+
+/* π constructors.name, CONCAT(forename, ' ', surname) → full_name, circuits.name, year (σ constructors.nationality = 'French' ∧ positionOrder = 1 (constructors ⨯ drivers ⨯ circuits ⨯ races ⨯ results)) */
+
+EquipesFR = σ nationality = 'French' (constructors)
+Vitorias = σ positionOrder = 1 (drivers ⨝ results ⨝ races ⨝ (π circuitId, name → cname (circuits)))
+
+π name → Equipe, CONCAT(forename, ' ', surname) → Piloto, cname → Circuito, year → Ano (EquipesFR ⟕ Vitorias)

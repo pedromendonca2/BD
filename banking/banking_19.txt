@@ -1,0 +1,10 @@
+/* Escreva uma consulta que retorna o nome das agências (branch_name) nas quais os recursos (assets) são maiores 
+que o recurso de alguma agência cujo nome da cidade (branch_city) é 'Brooklyn'. O resultado não deve conter ocorrências duplicadas. */
+
+b = π assets → a (σ branch_city = 'Brooklyn' (branch))
+
+π branch_name (
+  σ branch.assets > b.a (
+    branch ⨯ b
+  )
+)

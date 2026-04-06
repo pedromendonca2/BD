@@ -1,0 +1,11 @@
+/* Escreva uma consulta para obter o(s) nome da(s) equipe(s) (coluna name da tabela constructors) com menor
+número de aparições/participações em corridas (tabela races). As colunas da tabela de saída devem ter os nomes
+Equipe e Aparicoes, respectivamente. OBS: Equipes podem ter mais de um piloto por corrida e, nesses casos,
+devem ser contabilizadas todas as participações de forma independente (se há 2 pilotos, a equipe teve 2 aparições). Só devem ser consideradas equipes com alguma participação (ou seja, que aparecem na tabela results). */
+
+DadosBrutos = constructors ⨝ results
+AparicoesPorC = γ constructorId; count(resultId) -> c (DadosBrutos) 
+MenorNA = γ; min(c) -> m (AparicoesPorC)
+EquipesMNA = σ m = c (MenorNA ⨯ AparicoesPorC)
+
+π name -> Equipe, c -> Aparicoes (constructors ⨝ EquipesMNA) 

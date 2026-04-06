@@ -1,0 +1,6 @@
+/* Escreva uma consulta que retorna uma única coluna contendo o nome das agências (coluna branch_name) cuja soma de saldos de suas contas (coluna balance da tabela account) é superior à média da soma dos saldos de todas as agências. */
+
+SumSaldo = γ branch_name; sum(balance) → s (account)
+AvgSaldo = γ avg(s) → m (SumSaldo)
+
+π branch_name (σ s > m (AvgSaldo ⨯ SumSaldo))

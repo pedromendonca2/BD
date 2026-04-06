@@ -5,5 +5,5 @@ corrida (coluna positionOrder da tabela results). O resultado não deve conter o
 nE = pi nationality (constructors)
 nP = pi nationality (drivers)
 nEP = nE intersect nP
-nEsP = nE - nEP
-pi nationality (nEsP)
+nPsE = nP - nEP
+pi nationality (sigma positionOrder ≤ 3 (nPsE ⨝ drivers ⨝ results))

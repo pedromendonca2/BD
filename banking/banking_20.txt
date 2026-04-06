@@ -1,0 +1,7 @@
+/* Escreva uma consulta que retorna o número das contas (account_number) nas quais o saldo (balance) é menor
+que o saldo de alguma conta da agência cujo nome (branch_name) é 'North Town'. O resultado não deve conter
+ocorrências duplicadas. */
+
+a = π balance → b (σ branch_name = 'North Town' (account))
+
+π account_number (σ balance < b (account ⨯ a))

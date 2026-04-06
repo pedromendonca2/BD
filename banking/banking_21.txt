@@ -1,0 +1,7 @@
+/* Escreva uma consulta que retorna o número dos empréstimos (loan_number) nos quais a quantia tomada (amount)
+é menor ou igual a quantia tomada em algum empréstimo da agência cujo nome (branch_name) é 'Downtown'. O
+resultado não deve conter ocorrências duplicadas. */
+
+SaldosDT = pi amount → quantia (sigma branch_name = 'Downtown' (loan))
+
+pi loan_number (sigma amount ≤ quantia (loan ⨯ SaldosDT))

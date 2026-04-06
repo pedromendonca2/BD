@@ -1,0 +1,8 @@
+/* Escreva uma consulta para obter o(s) nome(s) da(s) equipe(s) (coluna name da tabela constructors) que nunca
+alcancáram o terceiro lugar ou melhor em uma corrida (tabela results). OBS: Considere todas as equipes da tabela
+constructors, inclusive aquelas que não possuem nenhum resultado registrado na tabela results. */
+
+nameT = pi name (constructors)
+nameRM = pi name (sigma positionOrder ≤ 3 (results ⨝ constructors))
+
+nameT - nameRM

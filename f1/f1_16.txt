@@ -1,0 +1,8 @@
+/* Escreva uma consulta para obter o(s) anos(s) (coluna year da tabela seasons) com maior número de corridas (tabela races) realizadas. As colunas da tabela de saída devem ter os nomes Temporada e Corridas, contendo,
+respectivamente, o ano e o maior número de corridas. */
+
+Retorno = π year, raceId (seasons ⨝ races)
+CorridasPorAno = γ year; count(raceId) → c (Retorno)
+MC = γ; max(c) → m (CorridasPorAno)
+AnosMC = σ c = m (CorridasPorAno ⨯ MC)
+π year → Temporada, m → Corridas (seasons ⨝ AnosMC)

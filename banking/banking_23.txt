@@ -1,0 +1,6 @@
+/* Escreva uma consulta que retorna o nome dos clientes (customer_name) que possuem conta em agências em que o
+cliente chamado 'Hayes' possui conta. O resultado não deve conter ocorrências duplicadas, nem incluir o nome do referido cliente. */
+
+HayesBranches = pi branch_name → HayesBranch (sigma customer_name = 'Hayes' (depositor ⨝ account))
+
+pi customer_name (sigma account.branch_name = HayesBranches.HayesBranch ∧ customer_name ≠ 'Hayes' ((depositor ⨝ account) ⨯ HayesBranches))

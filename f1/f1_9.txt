@@ -1,0 +1,15 @@
+/* Escreva uma consulta para obter a quantidade média de corridas realizadas por ano (use as colunas raceId e year,
+respectivamente, da tabela races) e retorne o resultado arredondado para um número inteiro (por ex., 10.1 → 10;
+13.7 → 14). A coluna da tabela de saída deve ter o nome MediaCorridas.
+Nota: Use a função ROUND() para arredondar valores numéricos. No MySQL e no PostgreSQL, pode-se passar um
+segundo argumento para indicar o número de casas decimais desejado, separado por vírgula (por exemplo,
+ROUND(valor, 2) arredonda para duas casas decimais). Sem o segundo argumento, o número é arredondado para o
+inteiro mais próximo. */
+    
+CorridasPorAno = γ year; count(raceId) -> total (races)
+
+MediaPrevia = γ; avg(total) -> media_raw (CorridasPorAno)
+
+Resultado = π round(media_raw) -> MediaCorridas (MediaPrevia)
+
+Resultado

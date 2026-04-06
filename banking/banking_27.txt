@@ -1,0 +1,7 @@
+/* Escreva uma consulta que retorna uma única coluna contendo o nome dos clientes (customer_name) que possuem
+conta em mais de uma agência, ou seja, possui mais de uma conta. O resultado não deve conter ocorrências duplicadas. */
+
+CustBranch = pi customer_name, branch_name (depositor ⨝ account)
+Version_2 = pi customer_name → c_2, branch_name → b_2 (CustBranch)
+
+pi customer_name (sigma customer_name = c_2 ∧ branch_name ≠ b_2 (CustBranch ⨯ Version_2))

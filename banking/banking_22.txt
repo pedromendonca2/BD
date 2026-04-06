@@ -1,0 +1,7 @@
+/* Escreva uma consulta que retorna uma única coluna contendo o nome dos clientes (customer_name) que moram em
+ruas com nomes (customer_street) iguais mas em cidades com nomes (customer_city) diferentes. O
+resultado não deve conter ocorrências duplicadas. */
+
+c2 = pi customer_street → rua2, customer_city → cidade2 (customer)
+
+pi customer_name (sigma customer_street = rua2 and customer_city ≠ cidade2 (customer ⨯ c2))

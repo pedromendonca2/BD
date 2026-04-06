@@ -1,0 +1,9 @@
+/* Escreva uma consulta para obter o(s) nome(s) do(s) circuito(s) (coluna name da tabela circuits) onde não foram
+realizadas corridas (tabela races). OBS: Considere que um circuito recebeu uma corrida se existir pelo menos uma
+referência a ele na tabela races. */
+
+TodosOsId = π circuitId (circuits)
+IdDeCorrida = π circuitId (races)
+IdSemCorrida = TodosOsId - IdDeCorrida
+
+π name (IdSemCorrida ⨝ circuits)

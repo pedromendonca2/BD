@@ -1,0 +1,5 @@
+/* Escreva uma consulta que retorna o nome das agências (coluna branch_name) e o saldo médio de suas contas (média da coluna balance por agência na tabela account). O resultado deve conter somente as agências cujo o saldo médio seja superior a $1200. */
+
+AvgSaldo = γ branch_name; avg(balance) → m (account)
+
+π branch_name, m (σ m > 1200 (AvgSaldo))

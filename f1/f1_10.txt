@@ -1,0 +1,9 @@
+/* Escreva uma consulta para obter a quantidade média de pilotos (tabela drivers) por temporada (tabela seasons) e
+retorne o resultado arredondado para um número inteiro (por ex., 15.4 → 15; 35.6 → 36). A coluna da tabela de
+saída deve ter o nome MediaPilotos. */	
+
+PilotosPorCorrida = π year, driverId (results ⨝ races)
+TotalPilotos = γ year; count(driverId) → c (PilotosPorCorrida)
+QtdMedia = γ; avg(c) → m (TotalPilotos)
+MediaPilotos = π round(m) → MediaPilotos (QtdMedia) 
+MediaPilotos

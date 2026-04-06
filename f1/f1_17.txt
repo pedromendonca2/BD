@@ -1,0 +1,20 @@
+/* Escreva uma consulta para obter o(s) nome(s) da(s) equipe(s) (coluna name da tabela constructors) que obtiveram a maior soma de pontos que qualquer um de seus concorrentes por pelo menos 2 temporadas (tabela seasons); ou seja, a soma das suas pontuações nas corridas realizadas em um ano foi a maior daquele ano. A coluna points da tabela results armazena a quantidade de pontos ganhos por um piloto de uma dada equipe em uma corrida e a coluna year da tabela races indica o ano de realização das corridas. A coluna da tabela de saída deve se chamar Equipe. */
+
+/* 1. Primeiro, somamos os pontos por equipe e por ano. */
+Pontos_Ano = γ constructorId, year; sum(points) → total (races ⨝ results)
+
+/* 2. Para saber quem superou os concorrentes, precisamos do maior total de CADA ano. */
+MP_Ano = γ year; max(total) → m (Pontos_Ano)
+
+/* 3. Filtramos as equipes que foram as campeãs (tiveram o total = máximo do ano). 
+   O join aqui alinha o 'm' do ano correto com o 'total' da equipe. */
+Vencedores = σ total = m (Pontos_Ano ⨝ MP_Ano)
+
+/* 4. Agora contamos quantas vezes cada equipe aparece na lista de vencedores. */
+ContagemVitorias = γ constructorId; count(year) → c2 (Vencedores)
+
+/* 5. Filtramos as equipes com pelo menos 2 vitórias (as EquipesMP que você queria). */
+EquipesMP = σ c2 >= 2 (ContagemVitorias)
+
+/* 6. Retorno final com o nome da equipe. */
+π name → Equipe (constructors ⨝ EquipesMP)
