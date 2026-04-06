@@ -16,4 +16,3 @@ FezTodas = (π driverId, circuitId (Real)) - Faltosos
 π CONCAT(forename, ' ', surname) → Piloto, name → Circuito (
   FezTodas ⨝ drivers ⨝ circuits
 )
-
