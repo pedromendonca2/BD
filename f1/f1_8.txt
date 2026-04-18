@@ -5,15 +5,14 @@ Piloto e Circuito, respectivamente, e o resultado não deve conter ocorrências 
 Excepcionalmente, um piloto pode ter mais de um resultado para a mesma corrida registrado na tabela results
 (obviamente, com resultId’s diferentes). */
 
-Real = π driverId, raceId, circuitId (results ⨝ races)
+R = π circuitId, raceId (races)
 
-Expectativa = (π driverId, circuitId (Real)) ⨝ (π circuitId, raceId (races))
+C = γ circuitId; COUNT(raceId) -> RacCirc (R)
 
-Faltosos = π driverId, circuitId (Expectativa - Real)
+P = π driverId, raceId (results)
 
-FezTodas = (π driverId, circuitId (Real)) - Faltosos
+J = γ driverId, circuitId; COUNT(raceId) -> RacDriv (P ⨝ R)
 
-π CONCAT(forename, ' ', surname) → Piloto, name → Circuito (
-  FezTodas ⨝ drivers ⨝ circuits
-)
+F = π driverId, circuitId σ RacDriv = RacCirc (J ⨝ C)
 
+π CONCAT(forename, ' ', surname) -> Piloto, name -> Circuito (F ⨝ drivers ⨝ circuits)

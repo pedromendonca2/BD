@@ -8,9 +8,9 @@ alcançado nenhuma vez a primeira posição, seu nome deve aparecer seguido de c
 tabela de saída devem ter os nomes Equipe, Piloto, Circuito e Ano, respectivamente, e o resultado não deve
 conter ocorrências duplicadas. */
 
-/* π constructors.name, CONCAT(forename, ' ', surname) → full_name, circuits.name, year (σ constructors.nationality = 'French' ∧ positionOrder = 1 (constructors ⨯ drivers ⨯ circuits ⨯ races ⨯ results)) */
-
 EquipesFR = σ nationality = 'French' (constructors)
 Vitorias = σ positionOrder = 1 (drivers ⨝ results ⨝ races ⨝ (π circuitId, name → cname (circuits)))
 
-π name → Equipe, CONCAT(forename, ' ', surname) → Piloto, cname → Circuito, year → Ano (EquipesFR ⟕ Vitorias)
+equipes = π constructorId, name (EquipesFR)
+
+π name → Equipe, CONCAT(forename, ' ', surname) → Piloto, cname → Circuito, year → Ano (equipes ⟕ Vitorias)

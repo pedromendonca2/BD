@@ -1,9 +1,15 @@
-/* Escreva uma consulta para obter a quantidade média de equipes (tabela constructors) por temporada (tabela
-seasons) e retorne o resultado arredondado para um número inteiro (por ex., 32.5 → 33; 40.2 → 40). A coluna da
-tabela de saída deve ter o nome MediaEquipes. */
+/* Escreva uma consulta para obter o(s) nome da(s) equipe(s) (coluna name da tabela constructors) com menor
+número de aparições/participações em corridas (tabela races). As colunas da tabela de saída devem ter os nomes
+Equipe e Aparicoes, respectivamente. */
 
-Retorno = π constructorId, year (races ⨝ results)
-Contador = γ year; count(constructorId) → c (Retorno)
-MediaCrua = γ; avg(c) → a (Contador)
-Media = π round(a) → MediaEquipes (MediaCrua)
-Media
+/* Retorno = π raceId, constructorId (races ⨝ results ⨝ constructors)
+Contador = γ constructorId; count(raceId) → c (Retorno)
+MenosAparicoes = γ; min(c) → m (Contador)
+Equipes = σ c = m (Contador ⨝ MenosAparicoes)
+π name -> Equipe, c -> Aparicoes (constructors ⨝ Equipes) */
+
+Retorno = π driverId, constructorId, raceId (results)
+Contador = γ constructorId; count(raceId) -> Aparicoes (Retorno)
+MenosAparicoes = γ min(Aparicoes) -> Aparicoes (Contador)
+Equipes = Contador ⨝ MenosAparicoes
+π name -> Equipe, Aparicoes (Equipes ⨝ constructors)

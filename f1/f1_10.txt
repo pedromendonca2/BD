@@ -2,7 +2,7 @@
 retorne o resultado arredondado para um número inteiro (por ex., 15.4 → 15; 35.6 → 36). A coluna da tabela de
 saída deve ter o nome MediaPilotos. */	
 
-PilotosPorCorrida = π year, driverId (results ⨝ races)
+PilotosPorCorrida = π year, driverId (seasons ⨝ races ⨝ results ⨝ drivers)
 TotalPilotos = γ year; count(driverId) → c (PilotosPorCorrida)
 QtdMedia = γ; avg(c) → m (TotalPilotos)
 MediaPilotos = π round(m) → MediaPilotos (QtdMedia) 

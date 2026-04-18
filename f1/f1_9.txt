@@ -5,11 +5,13 @@ Nota: Use a função ROUND() para arredondar valores numéricos. No MySQL e no P
 segundo argumento para indicar o número de casas decimais desejado, separado por vírgula (por exemplo,
 ROUND(valor, 2) arredonda para duas casas decimais). Sem o segundo argumento, o número é arredondado para o
 inteiro mais próximo. */
-    
-CorridasPorAno = γ year; count(raceId) -> total (races)
 
-MediaPrevia = γ; avg(total) -> media_raw (CorridasPorAno)
+TabelaBase = π raceId, year (races)
+		
+CorridasPorAno = γ year; count(raceId) -> total (TabelaBase)
 
-Resultado = π round(media_raw) -> MediaCorridas (MediaPrevia)
+MediaPrevia = γ; avg(total) -> mediaRaw (CorridasPorAno)
+
+Resultado = π round(mediaRaw) -> MediaCorridas (MediaPrevia)
 
 Resultado
