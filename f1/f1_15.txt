@@ -1,11 +1,10 @@
-/* Escreva uma consulta para obter o(s) nome da(s) equipe(s) (coluna name da tabela constructors) com menor
-número de aparições/participações em corridas (tabela races). As colunas da tabela de saída devem ter os nomes
-Equipe e Aparicoes, respectivamente. OBS: Equipes podem ter mais de um piloto por corrida e, nesses casos,
-devem ser contabilizadas todas as participações de forma independente (se há 2 pilotos, a equipe teve 2 aparições). Só devem ser consideradas equipes com alguma participação (ou seja, que aparecem na tabela results). */
+/* Escreva uma consulta para obter o(s) nome(s) do(s) grande(s) prêmio(s) (coluna name da tabela gps) com 
+corridas (tabela races) realizadas a maior quantidade de vezes. As colunas da tabela de saída devem ter 
+os nomes GP e Ocorrencias, respectivamente. */
 
-DadosBrutos = constructors ⨝ results
-AparicoesPorC = γ constructorId; count(resultId) -> c (DadosBrutos) 
-MenorNA = γ; min(c) -> m (AparicoesPorC)
-EquipesMNA = σ m = c (MenorNA ⨯ AparicoesPorC)
+Dados = races
+CorridasPorGp = γ gpId; count(raceId) -> c (Dados)
+MaiorNC = γ; max(c) -> m (CorridasPorGp)
+GpMNC = σ m = c (MaiorNC ⨯ CorridasPorGp)
 
-π name -> Equipe, c -> Aparicoes (constructors ⨝ EquipesMNA) 
+π name -> GP, c -> Ocorrencias (gps ⨝ GpMNC) 

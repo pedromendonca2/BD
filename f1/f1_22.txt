@@ -1,0 +1,11 @@
+/* Escreva uma consulta para obter o nome do Grande Prêmio (coluna name da tabela gps) e o país (coluna country da
+tabela circuits) no qual foi realizada a primeira corrida da história da Fórmula 1. As colunas da tabela de saída
+devem se chamar GP e Pais. OBS: A coluna round da tabela races indica a ordem em que uma corrida aconteceu
+dentro de uma temporada/ano (quanto menor, mais antiga). */
+
+Dados = π year, round, gpId, circuitId (races)
+anoMA = γ min(year) -> year (Dados)
+roundMA = γ min(round) -> round (Dados ⨝ anoMA)
+Final = Dados ⨝ roundMA ⨝ anoMA
+gpLimpo = π gpId, name -> GP (gps)
+π GP, country -> Pais (gpLimpo ⨝ circuits ⨝ Final)

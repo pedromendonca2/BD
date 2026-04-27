@@ -1,0 +1,23 @@
+/* Escreva uma consulta para obter o nome do(s) Grande(s) Prêmio(s) (coluna name da tabela gps) e a(s) temporada(s)
+(coluna year da tabela races) com o menor número de pilotos que terminaram uma corrida na história da Fórmula 1.
+Considera-se que um resultado corresponde a uma corrida concluída quando o respectivo status (coluna status da
+tabela status) é 'Finished' ou corresponde a um texto do tipo '+N Laps' (por exemplo, '+1 Lap', '+2
+Laps'), em que N representa um número inteiro positivo. OBS: Um piloto também pode ter mais de um resultado em
+uma mesma corrida, portanto, a contagem deve considerar pilotos distintos. As colunas da tabela de saída devem ter os
+nomes Temporada e Qtde_Pilotos, respectivamente.
+
+Nota: Use o operador LIKE para filtrar valores textuais com padrões usando % (qualquer sequência de caracteres) e _
+(um único caractere, seja qual for). Por exemplo, na tabela de status de resultados de corridas de F1, status LIKE
+'%ngine%' encontra ocorrências como 'Engine' ou 'Engine fire', enquanto status LIKE 'C_%'
+encontra termos que começam com a letra 'C' e tenha pelo menos mais como um caractere como 'Collision' ou 'Clutch'. */
+
+CorridaTerminada = σ status = 'Finished' or status LIKE '+%' (status)
+
+Dados = π raceId, driverId (results ⨝ CorridaTerminada)
+
+NumPilotos = γ raceId; count(driverId) -> c (Dados)
+MinPilotos = γ min(c) -> c (NumPilotos)
+
+Gps = (NumPilotos ⨝ MinPilotos)
+
+π year -> Temporada, c -> Qtde_Pilotos (Gps ⨝ races)

@@ -1,0 +1,15 @@
+/* Escreva uma consulta para obter o(s) nome da(s) equipe(s) (coluna name da tabela constructors) que participaram
+de todas as corridas realizadas em um ano (tabela seasons) mas não pontuaram em nenhuma delas (coluna points
+da tabela results igual a 0). As colunas da tabela de saída devem ter os nomes Equipe e Ano, respectivamente.
+OBS: Equipes podem ter mais de um piloto por corrida. */
+
+CorridasAno = γ year; COUNT(raceId) -> A (races)
+ParticipacoesUnicas = π year, constructorId, raceId (results ⨝ races)
+CorridasEquipe = γ year, constructorId; COUNT(raceId) -> B (ParticipacoesUnicas)
+EquipesTotalC = σ A = B (CorridasAno ⨝ CorridasEquipe)
+
+TotalPontos = γ year, constructorId; SUM(points) -> s (results ⨝ races)
+ZeroPontos = σ s = 0 (TotalPontos)
+EquipesFinal = (EquipesTotalC ⨝ ZeroPontos)
+	
+π name -> Equipe, year -> Ano (constructors ⨝ EquipesFinal)

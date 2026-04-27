@@ -1,12 +1,16 @@
-/* Escreva uma consulta para obter o(s) nome(s) completo(s) do(s) piloto(s) (colunas forename e surname da tabela drivers separadas por um ' ') que pontuaram (coluna points da tabela results maior que 0) em todas as corridas realizadas em um ano (tabela seasons). As colunas da tabela de saída devem ter os nomes Piloto e Ano,
-respectivamente. */
+/* Escreva uma consulta para obter o(s) nome(s) da(s) equipe(s) (coluna name da tabela constructors) que obtiveram
+a maior soma de pontos que qualquer um de seus concorrentes por pelo menos 2 temporadas (tabela seasons); ou
+seja, a soma das suas pontuações nas corridas realizadas em um ano foi a maior daquele ano. A coluna points da
+tabela results armazena a quantidade de pontos ganhos por um piloto de uma dada equipe em uma corrida e a
+coluna year da tabela races indica o ano de realização das corridas. A coluna da tabela de saída deve se chamar
+Equipe. */
 
-Corrida_Ano = γ year; count(raceId) -> total (seasons ⨝ races)
+Dados = (results ⨝ races)
+PontosTemporada = γ year, constructorId; SUM(points) → Total (Dados)
+MaiorQtdPontos = γ year; MAX(Total) → Total (PontosTemporada)
+EquipesMP = (PontosTemporada ⨝ MaiorQtdPontos)
 
-Ponto_Corrida = σ points > 0 (results ⨝ races)
+AnosVencedor = γ constructorId; COUNT(year) → anos (EquipesMP)
+EquipesFinal = σ anos >= 2 (AnosVencedor)
 
-Pontuadas_Ano = γ driverId, year; count(raceId) -> qtd (Ponto_Corrida)
-
-PilotosP = σ qtd = total (Pontuadas_Ano ⨝ Corrida_Ano)
-
-π concat(forename, ' ', surname) -> Piloto, year -> Ano (PilotosP ⨝ drivers)
+π name → Equipe (EquipesFinal ⨝ constructors)

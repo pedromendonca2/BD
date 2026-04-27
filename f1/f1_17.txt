@@ -1,20 +1,17 @@
-/* Escreva uma consulta para obter o(s) nome(s) da(s) equipe(s) (coluna name da tabela constructors) que obtiveram a maior soma de pontos que qualquer um de seus concorrentes por pelo menos 2 temporadas (tabela seasons); ou seja, a soma das suas pontuações nas corridas realizadas em um ano foi a maior daquele ano. A coluna points da tabela results armazena a quantidade de pontos ganhos por um piloto de uma dada equipe em uma corrida e a coluna year da tabela races indica o ano de realização das corridas. A coluna da tabela de saída deve se chamar Equipe. */
+/* Escreva uma consulta para obter o(s) nome(s) completo(s) do(s) piloto(s) (colunas forename e surname da tabela
+drivers separadas por um ' ') que obtiveram a maior soma de pontos que qualquer um de seus oponentes por pelo
+menos 4 temporadas (tabela seasons); ou seja, a soma das suas pontuações nas corridas realizadas em um ano foi a
+maior daquele ano. A coluna points da tabela results armazena a quantidade de pontos ganhos por um piloto em
+uma dada corrida e a coluna year da tabela races indica o ano de realização das corridas. A coluna da tabela de saída
+deve se chamar Piloto */
 
-/* 1. Primeiro, somamos os pontos por equipe e por ano. */
-Pontos_Ano = γ constructorId, year; sum(points) → total (races ⨝ results)
+Dados = π year, driverId, raceId, points (races ⨝ results)
+PontosPorAno = γ year, driverId; SUM(points) -> Total (Dados)
+MaiorQtdPontos = γ year; MAX(Total) -> Total (PontosPorAno)
+AnosUnicos = σ qtd = 1 γ year; COUNT(driverId) → qtd (MaiorQtdPontos ⨝ PontosPorAno)
+PilotosMP = (MaiorQtdPontos ⨝ AnosUnicos)
 
-/* 2. Para saber quem superou os concorrentes, precisamos do maior total de CADA ano. */
-MP_Ano = γ year; max(total) → m (Pontos_Ano)
+AnosVencedor = γ driverId; COUNT(year) -> c (PilotosMP ⨝ PontosPorAno)
+PilotosFinal = σ c ≥ 4 (AnosVencedor)
 
-/* 3. Filtramos as equipes que foram as campeãs (tiveram o total = máximo do ano). 
-   O join aqui alinha o 'm' do ano correto com o 'total' da equipe. */
-Vencedores = σ total = m (Pontos_Ano ⨝ MP_Ano)
-
-/* 4. Agora contamos quantas vezes cada equipe aparece na lista de vencedores. */
-ContagemVitorias = γ constructorId; count(year) → c2 (Vencedores)
-
-/* 5. Filtramos as equipes com pelo menos 2 vitórias (as EquipesMP que você queria). */
-EquipesMP = σ c2 >= 2 (ContagemVitorias)
-
-/* 6. Retorno final com o nome da equipe. */
-π name → Equipe (constructors ⨝ EquipesMP)
+π CONCAT(forename, ' ', surname) -> Piloto (drivers ⨝ PilotosFinal)

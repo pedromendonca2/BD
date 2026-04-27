@@ -1,0 +1,18 @@
+/* Escreva uma consulta para obter o(s) nome(s) completo(s) do(s) piloto(s) (colunas forename e surname da tabela
+drivers separadas por um ' ') mais velho(s) a vencer(em) uma corrida de Fórmula 1, a idade (em anos) em que o
+resultado histórico aconteceu, bem como o(s) nome(s) do(s) Grande(s) Prêmio(s) (coluna name da tabela gps) e a(s)
+temporada(s) (coluna year da tabela races). A coluna dob da tabela drivers define a data de nascimento do
+piloto (tipo cadeia de caracteres no formato 'YYYY-MM-DD'). A coluna grid da tabela results define a posição
+de largada, enquanto positionOrder a de chegada. As colunas da tabela de saída devem ter os nomes Piloto,
+Idade, GP e Temporada (ano de realização da corrida), respectivamente. */
+
+Vencedores = π driverId, raceId (σ positionOrder = 1 (results))
+
+IdadeNaVitoria = π driverId, gpId, year, year - year(date(dob)) -> idv (Vencedores ⨝ drivers ⨝ races)
+
+MaxIdade = γ max(idv) -> idv (IdadeNaVitoria)
+VencedoresVelhos = IdadeNaVitoria ⨝ MaxIdade 
+
+GP = π gpId, name (VencedoresVelhos ⨝ gps)
+
+π CONCAT(forename, ' ', surname) -> Piloto, idv -> Idade, name -> GP, year -> Temporada (drivers ⨝ GP ⨝ VencedoresVelhos)

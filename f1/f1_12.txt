@@ -1,5 +1,7 @@
-/* Escreva uma consulta para obter o nome completo do(s) piloto(s) (colunas forename, surname  =  e surname da tabela drivers separadas por ' ') com maior número de corridas (tabela races). As colunas da tabela de saída
-devem ter os nomes Piloto e Aparicoes, respectivamente. */
+/* Escreva uma consulta para obter o nome completo do(s) piloto(s) 
+(colunas forename, surname  =  e surname da tabela drivers separadas por 
+' ') com maior número de corridas (tabela races). As colunas da 
+tabela de saída devem ter os nomes Piloto e Aparicoes, respectivamente. */
 
 Retorno = π driverId, raceId (drivers ⨝ results ⨝ races)
 CorridasPorCorredor = γ driverId; count(raceId) → c (Retorno)

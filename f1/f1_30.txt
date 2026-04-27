@@ -1,0 +1,30 @@
+/* Escreva uma consulta para retornar uma tabela com quatro colunas chamadas Senna, Prost, Mansell e Piquet,
+respectivamente. Em cada coluna correspondente deve ser colocado, em ordem alfabética (crescente), o nome dos
+Grandes Prêmios (coluna name da tabela gps) que os pilotos ganharam na temporada de 1986 (coluna year da tabela
+seasons). Imprima NULL quando não houver mais Grandes Prêmios correspondentes a um piloto. A coluna grid da
+tabela results define a posição de largada, enquanto positionOrder a de chegada em uma corrida. */
+
+Gps = π gpId, driverId (σ year = 1986 and positionOrder = 1 (races ⨝ results))
+
+Indices = π rownum() → n (σ year = 1986 (races))
+
+PilotoSenna = π driverId (σ surname = 'Senna' (drivers))
+Senna = π rownum() → n, name → Senna (τ name (Gps ⨝ PilotoSenna ⨝ gps))
+
+PilotoProst = π driverId (σ surname = 'Prost' (drivers))
+Prost = π rownum() → n, name → Prost (τ name (Gps ⨝ PilotoProst ⨝ gps))
+
+PilotoMansell = π driverId (σ surname = 'Mansell' (drivers))
+Mansell = π rownum() → n, name → Mansell (τ name (Gps ⨝ PilotoMansell ⨝ gps))
+
+PilotoPiquet = π driverId (σ surname = 'Piquet' (drivers))
+Piquet = π rownum() → n, name → Piquet (τ name (Gps ⨝ PilotoPiquet ⨝ gps))
+
+Passo1 = Indices ⟕ Senna
+Passo2 = Passo1 ⟕ Prost
+Passo3 = Passo2 ⟕ Mansell
+Passo4 = Passo3 ⟕ Piquet
+
+TabelaLimpa = σ Senna != null or Prost != null or Mansell != null or Piquet != null (Passo4)
+
+π Senna, Prost, Mansell, Piquet (TabelaLimpa)

@@ -1,0 +1,12 @@
+/* Escreva uma consulta para obter o(s) nome(s) completo(s) do(s) piloto(s) (colunas forename e surname da tabela
+drivers separadas por um ' ') que correram alguma corrida (tabela races) como companheiro(s) do piloto de
+nome completo 'Michael Schumacher' na equipe de nome 'Ferrari' (coluna name da tabela
+constructors). A coluna da tabela de saída deve se chamar Piloto e o resultado não deve conter ocorrências
+duplicadas. */
+
+Schumacher = π driverId (σ forename = 'Michael' and surname = 'Schumacher' (drivers))
+Ferrari = π constructorId (σ name = 'Ferrari' (constructors))
+Corridas = π raceId, constructorId (Schumacher ⨝ results ⨝ Ferrari)
+Pilotos = π driverId (results ⨝ Corridas)
+ApenasCompanheiros = Pilotos - π driverId (Schumacher)
+π CONCAT(forename, ' ', surname) -> Piloto (ApenasCompanheiros ⨝ drivers)

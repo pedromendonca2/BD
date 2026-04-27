@@ -1,0 +1,20 @@
+/* Escreva uma consulta para obter o nome das equipes (coluna name da tabela constructors) e a quantidade de
+vezes que fizeram pole positions na história da Fórmula 1 (ou seja, o piloto largou em primeiro quando corria pela
+equipe). A coluna grid da tabela results define a posição de largada.
+As colunas da tabela de saída devem ter os nomes Equipe e Poles, respectivamente. As tuplas devem ser ordenadas
+de forma decrescente pela coluna Poles e, em caso de empate, em ordem alfabética pelo nome da equipe. O resultado
+deve ser limitado às 25 equipes com maior número de pole positions de acordo com os critérios indicados.
+
+Nota: Use o operador LIMIT para restringir o número de linhas retornadas por uma consulta. Por exemplo, LIMIT 5
+retorna apenas as cinco primeiras linhas do resultado. Em conjunto com OFFSET, é possível controlar a partir de qual
+linha iniciar a exibição – útil para paginação de resultados. No RelaX, use a função ROWNUM() para atribuir um
+número sequencial a cada linha do resultado de uma consulta e, assim, filtrar a quantidade de linhas desejada. */
+
+PilotosPole = σ grid = 1 (results)
+PolesPorConstrutora = γ constructorId; COUNT(raceId) -> c (PilotosPole)
+
+RawResult = π name -> Equipe, c -> Poles (constructors ⨝ PolesPorConstrutora)
+OrderedResult = τ Poles desc, Equipe asc (RawResult)
+Table = π Equipe, Poles, rownum() -> n (OrderedResult)
+
+π Equipe, Poles (σ n ≤ 25 (Table))
