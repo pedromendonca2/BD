@@ -3,19 +3,17 @@ direto(s) ou indireto(s) (em qualquer nível) da disciplina de nome 'SINAIS E SI
 O resultado não deve conter ocorrências duplicadas.
 Nota: Use a cláusula WITH RECURSIVE para percorrer a(s) hierarquia(s) ou cadeia(s) de dependência(s) */
 
-WITH RECURSIVE hierarquia AS (
-  -- 1. Âncora: Pega os pré-requisitos diretos
-  SELECT p.prereq_id 
-  FROM prereq AS p
-  INNER JOIN course AS c ON p.course_id = c.course_id
-  WHERE c.title = 'SINAIS E SISTEMAS'
+WITH RECURSIVE r(cid) AS (
+    /* Passo 1: Pega os pré-requisitos diretos (igual ao seu p1) */
+    select p.prereq_id
+    from course as c, prereq as p
+    where c.title = 'SINAIS E SISTEMAS' and c.course_id = p.course_id
 
-  UNION
+    UNION
 
-  -- 2. Recursão: Pega os pré-requisitos dos que já foram encontrados
-  SELECT p2.prereq_id 
-  FROM prereq AS p2
-  INNER JOIN hierarquia ON p2.course_id = hierarquia.prereq_id
+    /* Passo 2: Pega os pré-requisitos dos pré-requisitos (o loop) */
+    select p.prereq_id
+    from r, prereq as p
+    where r.cid = p.course_id
 )
--- 3. Resultado final
-SELECT DISTINCT prereq_id FROM hierarquia
+select distinct cid from r

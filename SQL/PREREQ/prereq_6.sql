@@ -2,5 +2,15 @@
 como pré-requisito direto a disciplina de nome 'CÁLCULO III' (coluna title da tabela course). O resultado não
 deve conter ocorrências duplicadas. */
 
-select distinct prereq_id from course, prereq
-where course.title = 'SINAIS E SISTEMAS' and course.course_id = prereq.course_id
+WITH RECURSIVE r(cid) AS (
+    select  p.course_id 
+    from course, prereq as p
+    where course.title = 'CÁLCULO III' and course.course_id = p.prereq_id
+
+    UNION
+
+    select p.course_id
+    from r, prereq as p
+    where r.course_id = p.prereq_id
+)
+select distinct cid from r
