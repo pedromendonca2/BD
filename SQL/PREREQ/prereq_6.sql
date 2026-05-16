@@ -11,6 +11,6 @@ WITH RECURSIVE r(cid) AS (
 
     select p.course_id
     from r, prereq as p
-    where r.course_id = p.prereq_id
+    where r.cid = p.prereq_id
 )
 select distinct cid from r
